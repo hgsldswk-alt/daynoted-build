@@ -1,0 +1,127 @@
+name: DoneList
+options:
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+  knownRegions: [en, zh-Hans, zh-Hant]
+settings:
+  base:
+    APP_ID: com.hgsldswk.daynoted
+    APP_STORE_ID: ""
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+  configs:
+    Debug:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUG"
+targets:
+  DoneList:
+    type: application
+    platform: iOS
+    sources: [DoneList, Shared]
+    dependencies:
+      - target: DoneListWidget
+        embed: true
+      - sdk: libsqlite3.tbd
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_ID)
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      configs:
+        Release:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Apple Distribution
+          PROVISIONING_PROFILE_SPECIFIER: DoneList AppStore
+    entitlements:
+      path: DoneList/DoneList.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.hgsldswk.daynoted]
+    info:
+      path: DoneList/Info.plist
+      properties:
+        CFBundleDisplayName: Daynoted
+        CFBundleDevelopmentRegion: en
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        APP_STORE_ID: $(APP_STORE_ID)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: com.hgsldswk.daynoted
+            CFBundleURLSchemes: [daynoted]
+  DoneListWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - DoneListWidget
+      - path: Shared
+        includes: [Day.swift, L10n.swift, Localizable.xcstrings, WidgetSnapshot.swift]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_ID).widget
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+      configs:
+        Release:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Apple Distribution
+          PROVISIONING_PROFILE_SPECIFIER: DoneList Widget AppStore
+    entitlements:
+      path: DoneListWidget/DoneListWidget.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.hgsldswk.daynoted]
+    info:
+      path: DoneListWidget/Info.plist
+      properties:
+        CFBundleDisplayName: Daynoted
+        CFBundleDevelopmentRegion: en
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+  DoneListTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [DoneListTests, Shared]
+    dependencies:
+      - sdk: libsqlite3.tbd
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_ID).tests
+        GENERATE_INFOPLIST_FILE: YES
+  DoneListUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [DoneListUITests]
+    dependencies:
+      - target: DoneList
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_ID).uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: DoneList
+schemes:
+  DoneList:
+    build:
+      targets:
+        DoneList: all
+        DoneListTests: [test]
+    test:
+      config: Debug
+      targets: [DoneListTests]
+    run:
+      config: Debug
+      storeKitConfiguration: DoneList/Daynoted.storekit
+  DoneListUI:
+    build:
+      targets:
+        DoneList: all
+        DoneListUITests: [test]
+    test:
+      config: Debug
+      targets: [DoneListUITests]
+

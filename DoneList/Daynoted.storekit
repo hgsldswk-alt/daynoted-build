@@ -1,0 +1,67 @@
+{
+  "identifier": "161BA70B-2325-4252-ACD1-9B219B037847",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "3.99",
+      "familyShareable": false,
+      "internalID": "1",
+      "localizations": [
+        {
+          "displayName": "Daynoted Plus",
+          "description": "Unlock all Plus features with one purchase.",
+          "locale": "en_US"
+        },
+        {
+          "displayName": "一次买断 Plus",
+          "description": "一次购买，解锁全部 Plus 功能。",
+          "locale": "zh_CN"
+        },
+        {
+          "displayName": "一次買斷 Plus",
+          "description": "一次購買，解鎖全部 Plus 功能。",
+          "locale": "zh_TW"
+        }
+      ],
+      "productID": "com.hgsldswk.daynoted.pro",
+      "referenceName": "Daynoted Plus",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "0.00",
+      "familyShareable": false,
+      "internalID": "2",
+      "localizations": [
+        {
+          "displayName": "30-Day Trial",
+          "description": "Try Plus free for 30 days.",
+          "locale": "en_US"
+        },
+        {
+          "displayName": "30 天免费试用",
+          "description": "免费试用 Plus 30 天。",
+          "locale": "zh_CN"
+        },
+        {
+          "displayName": "30 天免費試用",
+          "description": "免費試用 Plus 30 天。",
+          "locale": "zh_TW"
+        }
+      ],
+      "productID": "com.hgsldswk.daynoted.trial",
+      "referenceName": "30-Day Trial",
+      "type": "NonConsumable"
+    }
+  ],
+  "settings": {
+    "_failTransactionsEnabled": false,
+    "_locale": "en_US",
+    "_storefront": "USA",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}
